@@ -13,11 +13,16 @@ import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
+// import UserPage from '../Home/Home';
+import Home from '../Home/Home';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import MakeProgress from '../MakeProgress/MakeProgress';
+import RepeatRunList from '../RepeatRunList/RepeatRunList';
+import PlanRepeatRun from '../PlanRepeatRun/PlanRepeatRun';
+import History from '../History/History';
+import EditRunHistory from '../EditRunHistory/EditRunHistory';
 
 import './App.css';
 
@@ -44,14 +49,14 @@ class App extends Component {
               // logged in shows UserPage else shows LoginPage
               exact
               path="/user"
-              component={UserPage}
+              component={Home}
             />
 
             <ProtectedRoute
-              // logged in shows InfoPage else shows LoginPage
+              // logged in shows Home else shows LoginPage
               exact
               path="/info"
-              component={InfoPage}
+              component={Home}
             />
 
             {/* When a value is supplied for the authRedirect prop the user will
@@ -84,6 +89,47 @@ class App extends Component {
               component={LandingPage}
               authRedirect="/user"
             />
+
+            <ProtectedRoute 
+            exact
+            path="/make_progress"
+            component={MakeProgress}
+            // authRedirect="/user"
+            />
+
+            <ProtectedRoute
+            exact
+            path="/repeatrunlist"
+            component={RepeatRunList}
+            authRedirect="/user"
+            />
+
+            <ProtectedRoute 
+            exact
+            path="/planrepeatrun"
+            component={PlanRepeatRun}
+            authRedirect="/user"
+            />
+
+            <ProtectedRoute
+            exact
+            path="/history"
+            component={History}
+            authRedirect="/user"
+            />
+
+            <ProtectedRoute
+            exact
+            path="/editrunhistory"
+            component={EditRunHistory}
+            authRedirect="/user"
+            />
+
+
+
+
+
+
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
