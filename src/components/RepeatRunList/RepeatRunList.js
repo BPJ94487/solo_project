@@ -10,11 +10,16 @@ class RepeatRunList extends Component {
   state = {
     heading: 'Class Component',
   };
+componentDidMount() {
+    this.props.dispatch({ type: 'GET_CURRENT_RUN_LIST' })
+}
 
   render() {
     return (
       <div>
-        <h2>{this.state.heading}</h2>
+          
+        <h1>RepeatRunList</h1>
+
       </div>
     );
   }

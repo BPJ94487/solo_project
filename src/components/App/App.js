@@ -101,7 +101,7 @@ class App extends Component {
             exact
             path="/repeatrunlist"
             component={RepeatRunList}
-            authRedirect="/user"
+            
             />
 
             <ProtectedRoute 

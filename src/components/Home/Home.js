@@ -31,8 +31,8 @@ class Home extends Component {
 
 
 
-        <button onClick={this.navigate('/make_progress') }>MakeProgress</button>
-        {/* <button onClick={this.navigate('/repeatrunlist')}>RepeatRuns</button> */}
+        {/* <button onClick={this.navigate('/make_progress') }>MakeProgress</button> */}
+        <button onClick={this.navigate('/repeatrunlist')}>RepeatRuns</button>
         <center>
           <Card raised='true'>
             <CardHeader title='Make Progress' />
