@@ -7,7 +7,7 @@ function* getCurrentRunList(action) {
         console.log('made it to the getCurrentRunListSaga');
         
         try{
-            const response = yield axios.get(`this is the route to get the stuff`)
+            const response = yield axios.get(`/api/run/`)
             console.log(response);
             
             yield put({ type: 'FETCH_RUNS', payload: response.data})

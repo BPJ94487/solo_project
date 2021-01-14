@@ -11,10 +11,17 @@ class History extends Component {
     heading: 'Class Component',
   };
 
+  navigate = (web_address) => {
+    this.props.history.push(web_address)
+  };
+
   render() {
     return (
       <div>
-        {/* <h2>{this.state.heading}</h2> */}
+          <h1>Run History</h1>
+          <button onClick={ () => this.navigate('/editrunhistory') }>EditRunHistory</button>
+          <button onClick={ () => this.navigate('/home') }>Back</button>
+        
       </div>
     );
   }

@@ -11,10 +11,15 @@ class PlanRepeatRun extends Component {
     heading: 'Class Component',
   };
 
+  backButton = () => {
+    this.props.history.push('/repeatrunlist');
+}
+
   render() {
     return (
       <div>
-        <h2>{this.state.heading}</h2>
+        <h1>Plan Repeat Run</h1>
+        <button onClick={this.backButton}>Back</button>
       </div>
     );
   }

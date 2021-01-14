@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+// import { withRouter } from 'react-router-dom';
+
 // Material-UI stuff
 // import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
@@ -29,10 +31,9 @@ class Home extends Component {
         <LogOutButton className="log-in" />
 
 
-
-
-        {/* <button onClick={this.navigate('/make_progress') }>MakeProgress</button> */}
-        <button onClick={this.navigate('/repeatrunlist')}>RepeatRuns</button>
+        <button onClick={ () => this.navigate('/make_progress') }>MakeProgress</button>
+        <button onClick={ () => this.navigate('/repeatrunlist') }>RepeatRuns</button>
+        <button onClick={ () => this.navigate('/history') }>RunHistory</button>
         <center>
           <Card raised='true'>
             <CardHeader title='Make Progress' />
@@ -56,3 +57,4 @@ class Home extends Component {
 
 // this allows us to use <App /> in index.js
 export default connect(mapStoreToProps) (Home);
+// export default connect(mapStoreToProps)(withRouter(Home));

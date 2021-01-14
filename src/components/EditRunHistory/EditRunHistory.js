@@ -11,10 +11,15 @@ class EditRunHistory extends Component {
     heading: 'Class Component',
   };
 
+  backButton = () => {
+    this.props.history.push('/history');
+}
+
   render() {
     return (
       <div>
-        <h2>{this.state.heading}</h2>
+        <h1>EditRunHistory</h1>
+        <button onClick={this.backButton}>Back</button>
       </div>
     );
   }

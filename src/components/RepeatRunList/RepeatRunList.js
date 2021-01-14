@@ -14,11 +14,18 @@ componentDidMount() {
     this.props.dispatch({ type: 'GET_CURRENT_RUN_LIST' })
 }
 
+navigate = (web_address) => {
+    this.props.history.push(web_address)
+  };
+
   render() {
     return (
       <div>
           
         <h1>RepeatRunList</h1>
+        <button onClick={ () => this.navigate('/planrepeatrun')}>PlanRepeatRun</button>
+        <button onClick={ () => this.navigate('/home')}>Back</button>
+
 
       </div>
     );

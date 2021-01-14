@@ -48,16 +48,10 @@ class App extends Component {
             <ProtectedRoute
               // logged in shows UserPage else shows LoginPage
               exact
-              path="/user"
+              path="/home"
               component={Home}
             />
-
-            <ProtectedRoute
-              // logged in shows Home else shows LoginPage
-              exact
-              path="/info"
-              component={Home}
-            />
+            
 
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
@@ -69,7 +63,7 @@ class App extends Component {
               exact
               path="/login"
               component={LoginPage}
-              authRedirect="/user"
+              authRedirect="/home"
             />
             <ProtectedRoute
               // with authRedirect:
@@ -78,58 +72,48 @@ class App extends Component {
               exact
               path="/registration"
               component={RegisterPage}
-              authRedirect="/user"
+              authRedirect="/home"
             />
+
             <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LandingPage at "/home"
               exact
-              path="/home"
+              path="/landingpage"
               component={LandingPage}
-              authRedirect="/user"
+              authRedirect="/home"
             />
 
             <ProtectedRoute 
             exact
             path="/make_progress"
             component={MakeProgress}
-            // authRedirect="/user"
             />
 
             <ProtectedRoute
             exact
             path="/repeatrunlist"
-            component={RepeatRunList}
-            
+            component={RepeatRunList}            
             />
 
             <ProtectedRoute 
             exact
             path="/planrepeatrun"
             component={PlanRepeatRun}
-            authRedirect="/user"
             />
 
             <ProtectedRoute
             exact
             path="/history"
             component={History}
-            authRedirect="/user"
             />
 
             <ProtectedRoute
             exact
             path="/editrunhistory"
             component={EditRunHistory}
-            authRedirect="/user"
             />
-
-
-
-
-
-
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
