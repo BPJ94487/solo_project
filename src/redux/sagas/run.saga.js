@@ -3,13 +3,10 @@ import axios from 'axios';
 
 function* getCurrentRunList(action) {
 
-    if ( action.type === 'GET_CURRENT_RUN_LIST' ){
-        console.log('made it to the getCurrentRunListSaga');
-        
+    if ( action.type === 'GET_CURRENT_RUN_LIST' ){      
         try{
-            const response = yield axios.get(`/api/run/`)
-            console.log(response);
             
+            const response = yield axios.get(`/api/run/${action.payload}`)
             yield put({ type: 'FETCH_RUNS', payload: response.data})
         } catch ( error ) {
             console.log('error with the get request', error);

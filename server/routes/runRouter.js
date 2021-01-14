@@ -5,12 +5,20 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
-    console.log("made it to the get server side of the router all that is needed is a DB and a SQL")
-
-
-  // NOW I just need to set up the DB and the SQL text
-
+router.get('/:id', (req, res) => {
+    console.log('in GET route');
+    // console.log(req.params.id);
+    
+    const queryText = `SELECT * from run_history WHERE user_id= $1;`; // needs to be modified to select only for the user sending it.
+    pool.query(queryText, [req.params.id])     
+        .then((result) => { 
+            res.send(result.row); 
+        })
+        .catch((err) => {
+            console.log('Error completing the GET from run_history', err );
+            res.sendStatus(500);
+        });
+        
   // GET route code here
 });
 

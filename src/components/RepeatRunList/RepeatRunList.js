@@ -11,7 +11,7 @@ class RepeatRunList extends Component {
     heading: 'Class Component',
   };
 componentDidMount() {
-    this.props.dispatch({ type: 'GET_CURRENT_RUN_LIST' })
+    this.props.dispatch({ type: 'GET_CURRENT_RUN_LIST', payload: this.props.store.user.id })
 }
 
 navigate = (web_address) => {
@@ -21,7 +21,13 @@ navigate = (web_address) => {
   render() {
     return (
       <div>
-          
+
+        
+            <>
+            {JSON.stringify( this.props.store.user.id )}
+            </>
+        
+
         <h1>RepeatRunList</h1>
         <button onClick={ () => this.navigate('/planrepeatrun')}>PlanRepeatRun</button>
         <button onClick={ () => this.navigate('/home')}>Back</button>
