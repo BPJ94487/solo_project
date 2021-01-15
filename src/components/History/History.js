@@ -25,9 +25,17 @@ class History extends Component {
       <div>
         {/* {JSON.stringify(this.props.store.user.id )} */}
         {JSON.stringify(this.props.store.runReducer.historyReducer)}
+        {/* <-----------------------------------------------------------------------> */}
+
+          
 
 
 
+
+
+
+
+        {/* <--------------------------------------------------------------------------------> */}
           <h1>Run History</h1>
           <button onClick={ () => this.navigate('/editrunhistory') }>EditRunHistory</button>
           <button onClick={ () => this.navigate('/home') }>Back</button>
