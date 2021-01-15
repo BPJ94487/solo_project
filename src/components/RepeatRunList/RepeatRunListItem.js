@@ -4,26 +4,20 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
-// the component name EditRunHistory with the name for the new
+// the component name RepeatRunListItem with the name for the new
 // component.
-class EditRunHistory extends Component {
+class RepeatRunListItem extends Component {
   state = {
     heading: 'Class Component',
   };
 
-  backButton = () => {
-    this.props.history.push('/history');
-}
-
   render() {
     return (
       <div>
-        <h1>EditRunHistory</h1>
-        {JSON.stringify(this.props.store.runReducer.historyReducer[0])}
-        <button onClick={this.backButton}>Back</button>
+        <li>Name: {this.props.route.workout_name}, Location: {this.props.route.workout_location}</li>
       </div>
     );
   }
 }
 
-export default connect(mapStoreToProps)(EditRunHistory);
+export default connect(mapStoreToProps)(RepeatRunListItem);

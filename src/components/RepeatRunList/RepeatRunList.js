@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import RepeatRunListItem from './RepeatRunListItem';
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -21,14 +22,27 @@ navigate = (web_address) => {
   render() {
     return (
       <div>
-
-        
+       
             <>
             {JSON.stringify( this.props.store.user.id )}
             </>
         
 
         <h1>RepeatRunList</h1>
+
+       {JSON.stringify(this.props.store.runReducer)}
+
+        {/* <ul>
+            {this.props.store.runReducer.repeateRunReducer.map((route, index) => {
+               return <RepeatRunListItem key={index} route={route} />
+                // return <RepeatRunListItem key={index} name={route.history_name} location={route.history_location} description={route.history_description}/>
+            })}
+
+        </ul> */}
+
+
+
+        <br></br>
         <button onClick={ () => this.navigate('/planrepeatrun')}>PlanRepeatRun</button>
         <button onClick={ () => this.navigate('/home')}>Back</button>
 

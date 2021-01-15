@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const runRouter = require('./routes/runRouter');
+const runHistoryRouter = require('./routes/runHistoryRouter');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -25,7 +26,8 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter); //handles user authentication for us already
-app.use('/api/run', runRouter); //handles requests by the user for data
+app.use('/api/run', runRouter); //handles requests by the user for repeate run data
+app.use('/api/runhistory', runHistoryRouter); // handles reqwuest by the user for history data
 
 
 // Serve static files

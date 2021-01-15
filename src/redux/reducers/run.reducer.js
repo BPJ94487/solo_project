@@ -1,5 +1,8 @@
-const runReducer = (state = {}, action) => {
-    console.log(action.payload);
+import { combineReducers } from 'redux';
+
+
+const repeatRunReducer = (state = [], action) => {
+    // console.log(action.payload);
     
     switch (action.type) {
       case 'FETCH_RUNS':
@@ -10,7 +13,25 @@ const runReducer = (state = {}, action) => {
         return state;
     }
   };
+
+  const historyReducer = (state =[], action) => {
+    console.log(action.payload);
+    
+
+    switch (action.type) {
+        case 'FETCH_RUN_HISTORY':
+            return action.payload;
+        case 'UNSET_HISTORY':
+            return {};
+        default:
+            return state;
+    }
+  };
   
   // user will be on the redux state at:
   // state.user
-  export default runReducer;
+  export default combineReducers({
+    repeatRunReducer,
+    historyReducer,
+  });
+  

@@ -8,11 +8,15 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 // component.
 class MakeProgress extends Component {
   state = {
+      user_id: '',
       date: '',
       departureTime: '',
       returnTime: '',
       distance: '',
-      description: ''
+      description: '',
+      location: '',
+      rating: '',
+      pace: ''
   };
 
   addProgress = () => {
@@ -21,6 +25,8 @@ class MakeProgress extends Component {
 
   handleChange = name => event => {
       this.setState({ [name]: event.target.value });
+      let user_id = this.props.store.user.id;
+      this.setState({ user_id: this.props.store.user.id })
   }
 
   backButton = () => {
@@ -34,13 +40,17 @@ class MakeProgress extends Component {
     return (
       <div>
           <h1>MakeProgress</h1>
-          <input placeholder='date' onChange={this.handleChange('date')} />
+          <input placeholder='date year-day-month' onChange={this.handleChange('date')} />
           <br></br>
           <input placeholder='departure'  onChange={this.handleChange('departureTime')} />
           <br></br>
           <input placeholder='return' onChange={this.handleChange('returnTime')} />
           <br></br>
           <input placeholder='distance' onChange={this.handleChange('distance')} />
+          <br></br>
+          <input placeholder='location' onChange={this.handleChange('location')} />
+          <br></br>
+          <input placeholder='rating int' onChange={this.handleChange('rating')} />
           <br></br>
           <input placeholder='dropdownSelection' />
           <br></br>

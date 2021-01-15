@@ -11,6 +11,11 @@ class History extends Component {
     heading: 'Class Component',
   };
 
+  componentDidMount() {
+    this.props.dispatch({ type: 'GET_RUN_HISTORY', payload: this.props.store.user.id })
+}
+
+
   navigate = (web_address) => {
     this.props.history.push(web_address)
   };
@@ -18,6 +23,11 @@ class History extends Component {
   render() {
     return (
       <div>
+        {/* {JSON.stringify(this.props.store.user.id )} */}
+        {JSON.stringify(this.props.store.runReducer.historyReducer)}
+
+
+
           <h1>Run History</h1>
           <button onClick={ () => this.navigate('/editrunhistory') }>EditRunHistory</button>
           <button onClick={ () => this.navigate('/home') }>Back</button>
