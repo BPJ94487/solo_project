@@ -4,10 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //Material UI stuff
 import TextField from '@material-ui/core/TextField';
-import Fab from '@material-ui/core/Fab';
-import Slider from '@material-ui/core/Slider';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace

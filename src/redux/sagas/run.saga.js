@@ -13,6 +13,16 @@ function* getCurrentRunList(action) {
     }
 }
 
+function* editRepeatRun(action) {
+    if (action.type === 'EDIT_REPEAT_RUNS')
+    try{
+        const response = yield axios.put(`/api/run/`, action.payload)
+        yield put({ type: 'GET_CURRENT_RUN_LIST'})
+    } catch ( error ) {
+        console.log('error with the put request', error);
+    }
+}
+
 function* getRunHistory(action) {
 
     if ( action.type === 'GET_RUN_HISTORY'){
@@ -37,7 +47,7 @@ function* addRun(action){
     }
 }
 
-function* makeEdit(action){
+function* editHistory(action){
 
     if( action.type === 'MAKE_EDIT'){
         try{
@@ -49,17 +59,12 @@ function* makeEdit(action){
     }
 }
 
-
-
-
-
-
-
 function* runSaga() {
     yield takeEvery('GET_CURRENT_RUN_LIST', getCurrentRunList)
     yield takeEvery('GET_RUN_HISTORY', getRunHistory)
     yield takeEvery('MAKE_PROGRESS', addRun)
-    yield takeEvery('MAKE_EDIT', makeEdit)
+    yield takeEvery('MAKE_EDIT', editHistory)
+    yield takeEvery('EDIT_REPEAT_RUNS', editRepeatRun)
 }
 
 export default runSaga; 

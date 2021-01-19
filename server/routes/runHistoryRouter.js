@@ -9,7 +9,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('in GET route');
     console.log(req.params.id);
-    const queryText = `SELECT * from run_history WHERE user_id= $1;`; // needs to be modified to select only for the user sending it.
+    const queryText = `SELECT * from run_history WHERE user_id= $1 ORDER BY workout_date;`; // needs to be modified to select only for the user sending it.
     pool.query(queryText, [req.params.id])     
         .then((result) => {            
             res.send(result.rows); 

@@ -30,6 +30,7 @@ class EditRunHistory extends Component {
   }
 
   makeEdit = () => {
+    // this.props.dispatch({ type: 'UNTRACK' })
     this.props.dispatch({ type: 'MAKE_EDIT', payload: this.state })
     this.props.history.push('/history');
   }

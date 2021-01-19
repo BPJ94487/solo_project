@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import RepeatRunListItem from './RepeatRunListItem';
 
+
+// Material UI stuff
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+
+import TableRow from '@material-ui/core/TableRow';
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
 // the component name RepeatRunList with the name for the new
@@ -24,21 +31,33 @@ navigate = (web_address) => {
       <div>
        
             <>
-            {JSON.stringify( this.props.store.user.id )}
+            {/* {JSON.stringify( this.props.store.user.id )} */}
             </>
         
 
         <h1>RepeatRunList</h1>
 
-       {JSON.stringify(this.props.store.runReducer)}
+       {/* {JSON.stringify(this.props.store.runReducer.repeatRunReducer)} */}
 
-        {/* <ul>
-            {this.props.store.runReducer.repeateRunReducer.map((route, index) => {
-               return <RepeatRunListItem key={index} route={route} />
-                // return <RepeatRunListItem key={index} name={route.history_name} location={route.history_location} description={route.history_description}/>
-            })}
-
-        </ul> */}
+       <Table>
+          <TableHead>
+            <TableCell>Name</TableCell>
+            <TableCell>Difficulty</TableCell>
+            <TableCell>Location</TableCell>
+            <TableCell>Distance</TableCell>
+          </TableHead>
+          <TableBody>
+            {this.props.store.runReducer.repeatRunReducer.map((run, index) => {
+              return <TableRow key={index}>
+                      <TableCell>{run.workout_name}</TableCell>
+                      <TableCell>{run.workout_difficulty}</TableCell>
+                      <TableCell>{run.workout_location}</TableCell>
+                      <TableCell>{run.workout_distance}</TableCell>
+                      <button onClick={ () => this.editHistory(run.serial_id)} >Edit</button>
+                    </TableRow>;
+              })}
+          </TableBody>
+        </Table> 
 
 
 

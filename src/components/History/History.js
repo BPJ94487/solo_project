@@ -53,11 +53,12 @@ editHistory = (runSerialId) => {
           </TableHead>
           <TableBody>
             {this.props.store.runReducer.historyReducer.map((run, index) => {
-              return <TableRow key={index} onClick={ () => this.editHistory(run.serial_id)}>
+              return <TableRow key={index}>
                       <TableCell>{run.workout_date}</TableCell>
                       <TableCell>{run.history_name}</TableCell>
                       <TableCell>{run.workout_difficulty}</TableCell>
                       <TableCell>{run.workout_distance}</TableCell>
+                      <button onClick={ () => this.editHistory(run.serial_id)} >Edit</button>
                     </TableRow>;
               })}
           </TableBody>

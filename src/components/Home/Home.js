@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import Image from './images/make_progress.jpg'
+import ImageMakeProgress from './images/make_progress.jpg'
+import ImageRepeatRun from './images/repeat_run_background.jpg';
+import ImageHistory from './images/history_background.jpg';
 // import { withRouter } from 'react-router-dom';
 
 // Material-UI stuff
@@ -50,30 +52,32 @@ class Home extends Component {
                 // width="400"
                 height="400"
                 alt='running through mountains'
-                image= {Image}
+                image= {ImageMakeProgress}
               />
               </center>
             </Card>
           
-            <Card raised='true' style={{width: "50%", display: 'inline-block'}}>
+            <Card raised='true' style={{width: "50%", display: 'inline-block'}}
+              onClick={ () => this.navigate('/repeatrunlist') }>
               <CardHeader title='Repeat Runs' />
               <CardMedia 
                 component="img"
                 width='100'
                 height='400'
                 alt='running through mountains'
-                image= {Image}
+                image= {ImageRepeatRun}
               />
             </Card>
 
-            <Card raised='true' style={{width: "50%", display: 'inline-block', border: '10px'}}>
+            <Card raised='true' style={{width: "50%", display: 'inline-block', border: '10px'}}
+              onClick={ () => this.navigate('/history') }>
               <CardHeader title='History' />
               <CardMedia 
                 component="img"
                 width='100'
                 height='400'
                 alt='running through mountains'
-                image= {Image}
+                image= {ImageHistory}
               />
             </Card>
 
