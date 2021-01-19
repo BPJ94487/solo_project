@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+
+
+
+// Material UI stuff
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+
+import TableRow from '@material-ui/core/TableRow';
+
+
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
 // the component name History with the name for the new
@@ -16,30 +28,41 @@ class History extends Component {
 }
 
 
-  navigate = (web_address) => {
-    this.props.history.push(web_address)
-  };
+navigate = (web_address) => {
+  this.props.history.push(web_address)
+};
+
+editHistory = (runSerialId) => {  
+  this.props.dispatch({ type: 'TRACK_EDIT', payload: runSerialId });
+  this.props.history.push('/editrunhistory');
+}
+
+
+
 
   render() {
     return (
-      <div>
-        {/* {JSON.stringify(this.props.store.user.id )} */}
-        {JSON.stringify(this.props.store.runReducer.historyReducer)}
-        {/* <-----------------------------------------------------------------------> */}
-
-          
-
-
-
-
-
-
-
-        {/* <--------------------------------------------------------------------------------> */}
-          <h1>Run History</h1>
-          <button onClick={ () => this.navigate('/editrunhistory') }>EditRunHistory</button>
-          <button onClick={ () => this.navigate('/home') }>Back</button>
-        
+      <div>    
+        <h1>Run History</h1>
+        <Table>
+          <TableHead>
+            <TableCell>Date</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell>Effort</TableCell>
+            <TableCell>Distance</TableCell>
+          </TableHead>
+          <TableBody>
+            {this.props.store.runReducer.historyReducer.map((run, index) => {
+              return <TableRow key={index} onClick={ () => this.editHistory(run.serial_id)}>
+                      <TableCell>{run.workout_date}</TableCell>
+                      <TableCell>{run.history_name}</TableCell>
+                      <TableCell>{run.workout_difficulty}</TableCell>
+                      <TableCell>{run.workout_distance}</TableCell>
+                    </TableRow>;
+              })}
+          </TableBody>
+        </Table>      
+        <button onClick={ () => this.navigate('/home') }>Back</button>
       </div>
     );
   }

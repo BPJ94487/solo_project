@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 
 
 const repeatRunReducer = (state = [], action) => {
-    // console.log(action.payload);
     
     switch (action.type) {
       case 'FETCH_RUNS':
@@ -14,9 +13,7 @@ const repeatRunReducer = (state = [], action) => {
     }
   };
 
-  const historyReducer = (state =[], action) => {
-    console.log(action.payload);
-    
+  const historyReducer = (state =[], action) => { 
 
     switch (action.type) {
         case 'FETCH_RUN_HISTORY':

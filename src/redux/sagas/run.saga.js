@@ -30,9 +30,21 @@ function* addRun(action){
     if ( action.type === 'MAKE_PROGRESS'){
         try{
             const response = yield axios.post(`/api/runhistory`, action.payload)
-            // yield put({ type: 'FETCH_RUN_HISTORY'})
+            yield put({ type: 'GET_RUN_HISTORY'})
         } catch( error ) {
             console.log('error adding run to server', error);
+        }
+    }
+}
+
+function* makeEdit(action){
+
+    if( action.type === 'MAKE_EDIT'){
+        try{
+            const response = yield axios.put(`/api/runhistory`, action.payload)
+            // yield put({ type: 'GET_RUN_HISTORY'})
+        } catch( error ) {
+            console.log('error editing run on server', error);
         }
     }
 }
@@ -47,6 +59,7 @@ function* runSaga() {
     yield takeEvery('GET_CURRENT_RUN_LIST', getCurrentRunList)
     yield takeEvery('GET_RUN_HISTORY', getRunHistory)
     yield takeEvery('MAKE_PROGRESS', addRun)
+    yield takeEvery('MAKE_EDIT', makeEdit)
 }
 
 export default runSaga; 
