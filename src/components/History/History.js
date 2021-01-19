@@ -32,8 +32,8 @@ navigate = (web_address) => {
   this.props.history.push(web_address)
 };
 
-editHistory = (runSerialId) => {  
-  this.props.dispatch({ type: 'TRACK_EDIT', payload: runSerialId });
+editHistory = (run) => {  
+  this.props.dispatch({ type: 'EDIT_RUN_HISTORY', payload: run });
   this.props.history.push('/editrunhistory');
 }
 
@@ -53,16 +53,15 @@ editHistory = (runSerialId) => {
           </TableHead>
           <TableBody>
             {this.props.store.runReducer.historyReducer.map((run, index) => {
-              return <TableRow key={index}>
+              return <TableRow key={index} onClick={ () => this.editHistory(run)}>
                       <TableCell>{run.workout_date}</TableCell>
                       <TableCell>{run.history_name}</TableCell>
                       <TableCell>{run.workout_difficulty}</TableCell>
                       <TableCell>{run.workout_distance}</TableCell>
-                      <button onClick={ () => this.editHistory(run.serial_id)} >Edit</button>
                     </TableRow>;
               })}
           </TableBody>
-        </Table>      
+        </Table>     
         <button onClick={ () => this.navigate('/home') }>Back</button>
       </div>
     );
@@ -70,3 +69,4 @@ editHistory = (runSerialId) => {
 }
 
 export default connect(mapStoreToProps)(History);
+

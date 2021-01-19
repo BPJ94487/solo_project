@@ -11,7 +11,7 @@ import TextField from '@material-ui/core/TextField';
 // component.
 class PlanRepeatRun extends Component {
   state = {
-    user_id: "",
+    serial_id: "",
     name: "",
     distance: "",
     difficulty: "",
@@ -20,29 +20,55 @@ class PlanRepeatRun extends Component {
     stretches: "",
   };
 
+  componentDidMount(){
+    if (this.props.store.runReducer.editRepeatRunReducer.serial_id !== undefined ) {
+        this.setState({
+          serial_id: this.props.store.runReducer.editRepeatRunReducer.serial_id,
+          name: this.props.store.runReducer.editRepeatRunReducer.workout_name,
+          distance: this.props.store.runReducer.editRepeatRunReducer.workout_distance,
+          difficulty: this.props.store.runReducer.editRepeatRunReducer.workout_difficulty,
+          location: this.props.store.runReducer.editRepeatRunReducer.workout_location,
+          description: this.props.store.runReducer.editRepeatRunReducer.workout_description,
+        })
+    }
+  }
+
   saveButton = () => {
-    this.props.dispatch({ type: 'EDIT_REPEAT_RUNS', payload: this.state }) 
-    let user_id = this.props.store.user.id;
-  this.setState({ user_id: this.props.store.user.id })
+    if(this.props.store.runReducer.editRepeatRunReducer.serial_id == undefined){
+        this.props.dispatch({ type: 'EDIT_REPEAT_RUNS', payload: this.state }) 
+        let user_id = this.props.store.user.id;
+        this.setState({ user_id: this.props.store.user.id })
+        this.props.dispatch({type: 'UNSET_REPEAT_RUN'})
+        this.props.history.push('/repeatrunlist');
+    } else {
+        this.props.dispatch({ type: 'PUT_ROUTE_REPEAT', payload: this.state }) 
+        let user_id = this.props.store.user.id;
+        this.setState({ user_id: this.props.store.user.id })
+        this.props.dispatch({type: 'UNSET_REPEAT_RUN'})
+        this.props.history.push('/repeatrunlist');
+    }
+  }
+
+  deleteButton = () => {
+    this.props.dispatch ({type: 'DELETE_REPEAT_RUN', payload: this.state.serial_id});
     this.props.history.push('/repeatrunlist');
   }
 
   backButton = () => {
+    this.props.dispatch({type: 'UNSET_REPEAT_RUN'})
     this.props.history.push('/repeatrunlist');
-}
+  }
 
-handleChange = name => event => {
-this.setState({ [name]: event.target.value });
-let user_id = this.props.store.user.id;
-  this.setState({ user_id: this.props.store.user.id })
-}
+  handleChange = name => event => {
+  this.setState({ [name]: event.target.value });
+  let user_id = this.props.store.user.id;
+    this.setState({ user_id: this.props.store.user.id })
+  }
 
   render() {
-    console.log(this.state)
     return (
       <div>
         <h1>Plan Repeat Run</h1>
-
         <TextField        
               style={{margin: 7 , width: "15%"}}     
               label="Name"
@@ -56,7 +82,7 @@ let user_id = this.props.store.user.id;
           <TextField        
               style={{margin: 7 , width: "15%"}}     
               label="Distance"
-              type="Distance"
+              type="Number"
               value={this.state.distance}
               onChange={this.handleChange('distance')}
               margin="normal"
@@ -66,7 +92,7 @@ let user_id = this.props.store.user.id;
           <TextField        
               style={{margin: 7 , width: "15%"}}     
               label="Difficulty"
-              type="Difficulty"
+              type="Number"
               value={this.state.difficulty}
               onChange={this.handleChange('difficulty')}
               margin="normal"
@@ -112,13 +138,10 @@ let user_id = this.props.store.user.id;
             />    
             <br></br>
 
-
-
-
-
-
         <button onClick={this.backButton}>Cancle</button>
         <button onClick={this.saveButton}>Save</button>
+          <button onClick={this.deleteButton}>Delete</button>
+        
       </div>
     );
   }

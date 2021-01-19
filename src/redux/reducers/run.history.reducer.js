@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
 
-const editUserTracker = (state = {}, action) => {
+const runHistoryReducer = (state = {}, action) => {
     // console.log(action.payload);
     
     switch (action.type) {
-      case 'TRACK_EDIT':
+      case 'EDIT_RUN_HISTORY':
         return action.payload;
       case 'UNTRACK':
         return {};
@@ -19,6 +19,6 @@ const editUserTracker = (state = {}, action) => {
   // user will be on the redux state at:
   // state.user
   export default combineReducers({
-    editUserTracker,
+    runHistoryReducer,
     
   });

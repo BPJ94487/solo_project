@@ -11,7 +11,19 @@ const repeatRunReducer = (state = [], action) => {
       default:
         return state;
     }
-  };
+};
+
+const editRepeatRunReducer = (state = {}, action) => {
+
+  switch (action.type) {
+    case 'EDIT_REPEAT_RUN_REDUX':
+      return action.payload;
+    case 'UNSET_REPEAT_RUN':
+      return {};
+    default:
+      return state;
+  }
+};
 
   const historyReducer = (state =[], action) => { 
 
@@ -30,5 +42,6 @@ const repeatRunReducer = (state = [], action) => {
   export default combineReducers({
     repeatRunReducer,
     historyReducer,
+    editRepeatRunReducer,
   });
   

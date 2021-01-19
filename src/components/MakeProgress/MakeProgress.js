@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //Material UI stuff
 import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
 
 
 // Basic class component structure for React with default state
@@ -12,7 +13,7 @@ import TextField from '@material-ui/core/TextField';
 // component.
 class MakeProgress extends Component {
   state = {
-      user_id: '',
+      user_id: this.props.store.user.id,
       date: '',
       departureTime: '',
       returnTime: '',
@@ -20,29 +21,36 @@ class MakeProgress extends Component {
       description: '',
       location: '',
       rating: '',
-      pace: ''
+      pace: '',
   };
+
+  componentDidMount() {
+    this.props.dispatch({ type: 'GET_CURRENT_RUN_LIST', payload: this.props.store.user.id })
+}
 
   addProgress = () => {
     this.props.dispatch({ type: 'MAKE_PROGRESS', payload: this.state })
+    this.props.history.push('/home');
   }
 
   handleChange = name => event => {
       this.setState({ [name]: event.target.value });
-      let user_id = this.props.store.user.id;
-      this.setState({ user_id: this.props.store.user.id })
+      // let user_id = this.props.store.user.id;
+      // this.setState({ user_id: this.props.store.user.id })
   }
 
   backButton = () => {
       this.props.history.push('/home');
   }
  
+  handleSelection = () => event => {
+    console.log(event.target.value);
+    
+    
+  }
 
 
   render() {
-    console.log(this.state);
-  
-
     return (
       <div>
           <h1>MakeProgress</h1>
@@ -131,7 +139,25 @@ class MakeProgress extends Component {
             />    
             <br></br>
           
-          <input placeholder='dropdownSelection' />
+            <TextField
+              id="outlined-select-currency"
+              select
+              label="Select"
+              
+              // value={this.state.run}
+              onChange={this.handleSelection()}
+              
+              helperText="Please select your run"
+              margin="normal"
+              variant="outlined"
+            >
+              {this.props.store.runReducer.repeatRunReducer.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.workout_name}
+                </MenuItem>
+              ))}
+            </TextField>
+          {JSON.stringify(this.props.store.runReducer.repeatRunReducer)}
           
             
           <br></br>    

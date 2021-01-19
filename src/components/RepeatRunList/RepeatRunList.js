@@ -22,22 +22,19 @@ componentDidMount() {
     this.props.dispatch({ type: 'GET_CURRENT_RUN_LIST', payload: this.props.store.user.id })
 }
 
-navigate = (web_address) => {
-    this.props.history.push(web_address)
-  };
+planRun = (run) => {
+  console.log(run)
+  this.props.dispatch({ type: 'EDIT_REPEAT_RUN_REDUX', payload: run });
+  this.props.history.push('/planrepeatrun');
+}
 
+navigate = (web_address) => {
+  this.props.history.push(web_address)
+};
   render() {
     return (
       <div>
-       
-            <>
-            {/* {JSON.stringify( this.props.store.user.id )} */}
-            </>
-        
-
-        <h1>RepeatRunList</h1>
-
-       {/* {JSON.stringify(this.props.store.runReducer.repeatRunReducer)} */}
+        <h1>RepeatRunList</h1>       
 
        <Table>
           <TableHead>
@@ -47,13 +44,12 @@ navigate = (web_address) => {
             <TableCell>Distance</TableCell>
           </TableHead>
           <TableBody>
-            {this.props.store.runReducer.repeatRunReducer.map((run, index) => {
-              return <TableRow key={index}>
+            {this.props.store.runReducer?.repeatRunReducer.map((run, index) => {
+              return <TableRow key={index} onClick={ () => this.planRun(run)}>
                       <TableCell>{run.workout_name}</TableCell>
                       <TableCell>{run.workout_difficulty}</TableCell>
                       <TableCell>{run.workout_location}</TableCell>
                       <TableCell>{run.workout_distance}</TableCell>
-                      <button onClick={ () => this.editHistory(run.serial_id)} >Edit</button>
                     </TableRow>;
               })}
           </TableBody>

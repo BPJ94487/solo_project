@@ -16,8 +16,26 @@ function* getCurrentRunList(action) {
 function* editRepeatRun(action) {
     if (action.type === 'EDIT_REPEAT_RUNS')
     try{
-        const response = yield axios.put(`/api/run/`, action.payload)
-        yield put({ type: 'GET_CURRENT_RUN_LIST'})
+        const response = yield axios.post(`/api/run`, action.payload)
+    } catch ( error ) {
+        console.log('error with the put request', error);
+    }
+}
+
+function* deleteRepeatRun(action) {
+    if( action.type=== 'DELETE_REPEAT_RUN'){
+        try{
+            const response = yield axios.delete(`/api/run/${action.payload}`)
+        } catch ( error ) {
+            console.log('error with the delete request', error);            
+        }
+    }
+}
+
+function* putRepeatRun(action) {
+    if(action.type === 'PUT_ROUTE_REPEAT')
+    try{
+        const response = yield axios.put(`/api/run`, action.payload)
     } catch ( error ) {
         console.log('error with the put request', error);
     }
@@ -48,11 +66,9 @@ function* addRun(action){
 }
 
 function* editHistory(action){
-
-    if( action.type === 'MAKE_EDIT'){
+    if ( action.type === 'EDIT_RUN_HISTORY_SAGA'){
         try{
             const response = yield axios.put(`/api/runhistory`, action.payload)
-            // yield put({ type: 'GET_RUN_HISTORY'})
         } catch( error ) {
             console.log('error editing run on server', error);
         }
@@ -63,8 +79,10 @@ function* runSaga() {
     yield takeEvery('GET_CURRENT_RUN_LIST', getCurrentRunList)
     yield takeEvery('GET_RUN_HISTORY', getRunHistory)
     yield takeEvery('MAKE_PROGRESS', addRun)
-    yield takeEvery('MAKE_EDIT', editHistory)
+    yield takeEvery('EDIT_RUN_HISTORY_SAGA', editHistory)
     yield takeEvery('EDIT_REPEAT_RUNS', editRepeatRun)
+    yield takeEvery('PUT_ROUTE_REPEAT', putRepeatRun)
+    yield takeEvery('DELETE_REPEAT_RUN', deleteRepeatRun)
 }
 
 export default runSaga; 

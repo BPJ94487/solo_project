@@ -24,7 +24,9 @@ class Home extends Component {
     this.props.history.push(web_address)
   };
 
-
+  componentDidMount() {
+    this.props.dispatch({ type: 'GET_CURRENT_RUN_LIST', payload: this.props.store.user.id })
+}
 
 
   // this component doesn't do much to start, just renders some user info to the DOM
@@ -33,13 +35,8 @@ class Home extends Component {
     return (
       <div >
         <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
-        <p>Your ID is: {this.props.store.user.id}</p>
-        <LogOutButton className="log-in" />
 
-
-        <button onClick={ () => this.navigate('/make_progress') }>MakeProgress</button>
-        <button onClick={ () => this.navigate('/repeatrunlist') }>RepeatRuns</button>
-        <button onClick={ () => this.navigate('/history') }>RunHistory</button>
+        <LogOutButton className="log-in" />  
        
           <div maxWidth={1800} >
             

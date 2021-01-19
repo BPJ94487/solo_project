@@ -7,16 +7,25 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 // the component name EditRunHistory with the name for the new
 // component.
 class EditRunHistory extends Component {
+
+  componentDidMount() {
+    if (this.state.serial_id === undefined) {
+      this.props.history.push('/history');
+    }
+  }
+
+
+
   state = {
     user_id: this.props.store.user.id,
-    name: this.props.store.runReducer.historyReducer[(this.props.store.editUserTracker.editUserTracker)-1].history_name,
-    date: this.props.store.runReducer.historyReducer[(this.props.store.editUserTracker.editUserTracker)-1].workout_date,
-    distance: this.props.store.runReducer.historyReducer[(this.props.store.editUserTracker.editUserTracker)-1].workout_distance,
-    difficulty: this.props.store.runReducer.historyReducer[(this.props.store.editUserTracker.editUserTracker)-1].workout_difficulty,
-    location:this.props.store.runReducer.historyReducer[(this.props.store.editUserTracker.editUserTracker)-1].history_location,
-    description: this.props.store.runReducer.historyReducer[(this.props.store.editUserTracker.editUserTracker)-1].workout_description,
+    name: this.props.store.runHistoryReducer.runHistoryReducer.history_name,
+    date: this.props.store.runHistoryReducer.runHistoryReducer.workout_date,
+    distance: this.props.store.runHistoryReducer.runHistoryReducer.workout_distance,
+    difficulty: this.props.store.runHistoryReducer.runHistoryReducer.workout_difficulty,
+    location: this.props.store.runHistoryReducer.runHistoryReducer.history_location,
+    description: this.props.store.runHistoryReducer.runHistoryReducer.workout_description,
     stretches:'',
-    serial_id: this.props.store.editUserTracker.editUserTracker,
+    serial_id: this.props.store.runHistoryReducer.runHistoryReducer.serial_id,
   };
 
   backButton = () => {
@@ -30,8 +39,7 @@ class EditRunHistory extends Component {
   }
 
   makeEdit = () => {
-    // this.props.dispatch({ type: 'UNTRACK' })
-    this.props.dispatch({ type: 'MAKE_EDIT', payload: this.state })
+    this.props.dispatch({ type: 'EDIT_RUN_HISTORY_SAGA', payload: this.state })
     this.props.history.push('/history');
   }
 
@@ -39,11 +47,12 @@ class EditRunHistory extends Component {
     return (
       <div>
         <h1>EditRunHistory</h1>
+        <br></br>
         <label>name</label>
           <input placeholder={this.state.name}  onChange={this.handleChange('name')} />
           <br></br>
         <label>date</label>
-        <input placeholder={this.props.store.runReducer.historyReducer[(this.props.store.editUserTracker.editUserTracker)-1].workout_date} onChange={this.handleChange('date')} />
+        <input placeholder={this.state.date} onChange={this.handleChange('date')} />
           <br></br>
           <label>distance</label>
           <input placeholder={this.state.distance}  onChange={this.handleChange('distance')} />
@@ -59,8 +68,6 @@ class EditRunHistory extends Component {
         
         <button onClick={this.backButton}>Back</button>
         <button onClick={this.makeEdit}>Submit Changes</button>
-
-        {JSON.stringify(this.props.store.runReducer.historyReducer[(this.props.store.editUserTracker.editUserTracker)-1])}
       </div>
     );
   }
