@@ -3,12 +3,8 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
+
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    console.log('in GET route');
-    console.log(req.params.id);
     const queryText = `SELECT * from run_history WHERE user_id= $1 ORDER BY workout_date;`; // needs to be modified to select only for the user sending it.
     pool.query(queryText, [req.params.id])     
         .then((result) => {            
@@ -20,9 +16,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         });     
 });
 
-/**
- * POST route template
- */
+
 router.post('/', rejectUnauthenticated, (req, res) => {   
     console.log(req.body)
     const queryText = `INSERT INTO run_history (user_id, history_name, history_location, workout_description, workout_distance, workout_difficulty, workout_date, workout_rating, workout_id, start_time, end_time )
@@ -37,7 +31,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 
-
 router.put('/', rejectUnauthenticated, (req, res) => {
     console.log(req.body);
     const queryText = `UPDATE run_history SET history_name = $1, history_location = $2, workout_description = $3, workout_distance = $4, workout_difficulty = $5, workout_date = $6, workout_rating = $7
@@ -49,5 +42,17 @@ router.put('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
     });  
 });
+
+
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    console.log('what to delete', req.params.id);
+    const queryText = `DELETE FROM run_history * WHERE serial_id = $1;`;
+    pool.query(queryText, [req.params.id])
+    .then(() => { res.sendStatus(201); })
+    .catch((err) => {
+        console.log('Error completing DELETE server query', err);
+        res.sendStatus(500);
+    });   
+})
 
 module.exports = router;

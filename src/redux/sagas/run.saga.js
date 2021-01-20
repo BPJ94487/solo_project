@@ -75,6 +75,18 @@ function* editHistory(action){
     }
 }
 
+function* deleteHistory(action){
+    if ( action.type === 'DELETE_HISTORICAL_RUN'){
+        console.log(action.payload);
+        
+        try{
+            yield axios.delete(`/api/runhistory/${action.payload}`)
+        }catch( error ) {
+            console.log('error editing run on server', error);
+        }
+    }
+}
+
 function* runSaga() {
     yield takeEvery('GET_CURRENT_RUN_LIST', getCurrentRunList)
     yield takeEvery('GET_RUN_HISTORY', getRunHistory)
@@ -83,6 +95,7 @@ function* runSaga() {
     yield takeEvery('EDIT_REPEAT_RUNS', editRepeatRun)
     yield takeEvery('PUT_ROUTE_REPEAT', putRepeatRun)
     yield takeEvery('DELETE_REPEAT_RUN', deleteRepeatRun)
+    yield takeEvery('DELETE_HISTORICAL_RUN', deleteHistory)
 }
 
 export default runSaga; 

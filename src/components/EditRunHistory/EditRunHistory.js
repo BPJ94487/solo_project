@@ -43,10 +43,15 @@ class EditRunHistory extends Component {
     this.props.history.push('/history');
   }
 
+  delete = () => {
+    this.props.dispatch({ type: 'DELETE_HISTORICAL_RUN', payload: this.state.serial_id })
+    this.props.history.push('/history');
+  }
+
   render() {
     return (
       <div>
-        <h1>EditRunHistory</h1>
+        <h1>Edit Run History</h1>
         <br></br>
 
         <TextField         
@@ -122,6 +127,7 @@ class EditRunHistory extends Component {
             <center>
             <Button variant="contained"  onClick={this.makeEdit}>Submit Changes</Button>
             </center>
+            <Button variant="contained"  onClick={this.delete}>Delete</Button>
 
         
       </div>
