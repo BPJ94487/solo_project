@@ -8,8 +8,9 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
-
 import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
 // the component name RepeatRunList with the name for the new
@@ -34,8 +35,9 @@ navigate = (web_address) => {
   render() {
     return (
       <div>
-        <h1>RepeatRunList</h1>       
-
+        <center>
+          <h1>Repeat Run List</h1>       
+        </center>
        <Table>
           <TableHead>
             <TableCell>Name</TableCell>
@@ -54,14 +56,11 @@ navigate = (web_address) => {
               })}
           </TableBody>
         </Table> 
-
-
-
         <br></br>
-        <button onClick={ () => this.navigate('/planrepeatrun')}>PlanRepeatRun</button>
-        <button onClick={ () => this.navigate('/home')}>Back</button>
-
-
+        <Button variant="contained" onClick={ () => this.navigate('/home')}>Back</Button>
+        <center>
+        <Button variant="contained" onClick={ () => this.navigate('/planrepeatrun')}>Plan a Run</Button>
+        </center>
       </div>
     );
   }

@@ -4,6 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //Material UI stuff
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -29,20 +30,19 @@ class PlanRepeatRun extends Component {
           difficulty: this.props.store.runReducer.editRepeatRunReducer.workout_difficulty,
           location: this.props.store.runReducer.editRepeatRunReducer.workout_location,
           description: this.props.store.runReducer.editRepeatRunReducer.workout_description,
+          stretches: this.props.store.runReducer.editRepeatRunReducer.stretches
         })
     }
   }
 
   saveButton = () => {
-    if(this.props.store.runReducer.editRepeatRunReducer.serial_id == undefined){
-        this.props.dispatch({ type: 'EDIT_REPEAT_RUNS', payload: this.state }) 
-        let user_id = this.props.store.user.id;
+    if(this.props.store.runReducer.editRepeatRunReducer.serial_id === undefined){
+        this.props.dispatch({ type: 'EDIT_REPEAT_RUNS', payload: this.state })         
         this.setState({ user_id: this.props.store.user.id })
         this.props.dispatch({type: 'UNSET_REPEAT_RUN'})
         this.props.history.push('/repeatrunlist');
     } else {
         this.props.dispatch({ type: 'PUT_ROUTE_REPEAT', payload: this.state }) 
-        let user_id = this.props.store.user.id;
         this.setState({ user_id: this.props.store.user.id })
         this.props.dispatch({type: 'UNSET_REPEAT_RUN'})
         this.props.history.push('/repeatrunlist');
@@ -61,7 +61,6 @@ class PlanRepeatRun extends Component {
 
   handleChange = name => event => {
   this.setState({ [name]: event.target.value });
-  let user_id = this.props.store.user.id;
     this.setState({ user_id: this.props.store.user.id })
   }
 
@@ -138,9 +137,12 @@ class PlanRepeatRun extends Component {
             />    
             <br></br>
 
-        <button onClick={this.backButton}>Cancle</button>
-        <button onClick={this.saveButton}>Save</button>
-          <button onClick={this.deleteButton}>Delete</button>
+        <Button variant="contained" onClick={this.backButton}>Back</Button>
+        <center>
+          <Button variant="contained" onClick={this.saveButton}>Save</Button>
+        </center>
+        
+          <Button variant="contained" onClick={this.deleteButton}>Delete</Button>
         
       </div>
     );

@@ -5,7 +5,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 //Material UI stuff
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import Button from '@material-ui/core/Button';
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -35,26 +35,46 @@ class MakeProgress extends Component {
 
   handleChange = name => event => {
       this.setState({ [name]: event.target.value });
-      // let user_id = this.props.store.user.id;
-      // this.setState({ user_id: this.props.store.user.id })
+      if(event.target.value.serial_id !== undefined){
+        console.log('this is working');
+        this.setState({ name: event.target.value.workout_name,
+                        location: event.target.value.workout_location,
+                        description: event.target.value.workout_description,
+                        distance: event.target.value.workout_distance,
+        })
+      }
   }
 
   backButton = () => {
       this.props.history.push('/home');
   }
  
-  handleSelection = () => event => {
-    console.log(event.target.value);
-    
-    
-  }
-
 
   render() {
+    console.log(this.state);    
     return (
       <div>
           <h1>MakeProgress</h1>
-          <TextField   
+          <TextField
+              style={{margin: 7 , width: "15%"}}
+              id="outlined-select-currency"
+              select
+              label="Select"              
+              // value={this.state.run}
+              onChange={this.handleChange('')}              
+              helperText="Repeat run"
+              margin="normal"
+              variant="outlined"
+            >
+              {this.props.store.runReducer.repeatRunReducer.map(option => (
+                <MenuItem key={option.serial_id} value={option}>
+                  {option.workout_name}
+                </MenuItem>
+              ))}
+            </TextField>
+            <br></br>
+
+            <TextField   
               style={{margin: 7 , width: "15%"}}          
               // label="Date"
               type="Date"
@@ -64,6 +84,7 @@ class MakeProgress extends Component {
               variant="outlined"
             />
             <br></br>
+
             <TextField  
               style={{margin: 7 , width: "15%"}}           
               label="Departure"
@@ -74,6 +95,7 @@ class MakeProgress extends Component {
               variant="outlined"
             />
             <br></br>
+
             <TextField            
               style={{margin: 7 , width: "15%"}} 
               label="Return"
@@ -84,6 +106,18 @@ class MakeProgress extends Component {
               variant="outlined"
             />
           <br></br>
+
+          <TextField   
+              style={{margin: 7 , width: "15%"}}          
+              label="Effort 1-10 "
+              type="Number"
+              value={this.state.rating}
+              onChange={this.handleChange('rating')}
+              margin="normal"
+              variant="outlined"
+            />
+          <br></br>
+
           <TextField            
               style={{margin: 7 , width: "15%"}} 
               label="Distance"
@@ -94,6 +128,7 @@ class MakeProgress extends Component {
               variant="outlined"
             />
           <br></br>
+
           <TextField         
               style={{margin: 7 , width: "15%"}}    
               label="Location"
@@ -104,26 +139,6 @@ class MakeProgress extends Component {
               variant="outlined"
             />
           <br></br>
-          <TextField   
-              style={{margin: 7 , width: "15%"}}          
-              label="Rating"
-              type="Rating"
-              value={this.state.rating}
-              onChange={this.handleChange('rating')}
-              margin="normal"
-              variant="outlined"
-            />
-          <br></br>
-          <TextField        
-              style={{margin: 7 , width: "15%"}}     
-              label="Rating"
-              type="Rating"
-              value={this.state.rating}
-              onChange={this.handleChange('rating')}
-              margin="normal"
-              variant="outlined"
-            />
-          <br></br> 
 
           <TextField   
               id="outlined-multiline-flexible"
@@ -137,33 +152,12 @@ class MakeProgress extends Component {
               margin="normal"
               variant="outlined"
             />    
-            <br></br>
-          
-            <TextField
-              id="outlined-select-currency"
-              select
-              label="Select"
-              
-              // value={this.state.run}
-              onChange={this.handleSelection()}
-              
-              helperText="Please select your run"
-              margin="normal"
-              variant="outlined"
-            >
-              {this.props.store.runReducer.repeatRunReducer.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.workout_name}
-                </MenuItem>
-              ))}
-            </TextField>
-          {JSON.stringify(this.props.store.runReducer.repeatRunReducer)}
-          
-            
-          <br></br>    
-          <button onClick={this.addProgress}>Add</button>  
-          <button onClick={this.backButton}>Back</button>
-      </div>
+            <br></br>       
+          <Button variant="contained" onClick={this.backButton}>Back</Button>
+          <center>
+            <Button variant="contained" onClick={this.addProgress}>Add</Button>  
+          </center>
+      </div>      
     );
   }
 }

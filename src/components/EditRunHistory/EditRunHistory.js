@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+// Material UI stuff
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
@@ -13,8 +16,6 @@ class EditRunHistory extends Component {
       this.props.history.push('/history');
     }
   }
-
-
 
   state = {
     user_id: this.props.store.user.id,
@@ -34,7 +35,6 @@ class EditRunHistory extends Component {
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
-    let user_id = this.props.store.user.id;
     this.setState({ user_id: this.props.store.user.id })
   }
 
@@ -48,26 +48,82 @@ class EditRunHistory extends Component {
       <div>
         <h1>EditRunHistory</h1>
         <br></br>
-        <label>name</label>
-          <input placeholder={this.state.name}  onChange={this.handleChange('name')} />
+
+        <TextField         
+              style={{margin: 7 , width: "15%"}}    
+              label="Name"
+              type="text"
+              value={this.state.name}
+              onChange={this.handleChange('name')}
+              margin="normal"
+              variant="outlined"
+            />
           <br></br>
-        <label>date</label>
-        <input placeholder={this.state.date} onChange={this.handleChange('date')} />
+
+          <TextField         
+              style={{margin: 7 , width: "15%"}}    
+              // label="Date"
+              type="Date"
+              value={this.state.date}
+              onChange={this.handleChange('date')}
+              margin="normal"
+              variant="outlined"
+            />
           <br></br>
-          <label>distance</label>
-          <input placeholder={this.state.distance}  onChange={this.handleChange('distance')} />
+
+          <TextField         
+              style={{margin: 7 , width: "15%"}}    
+              label="Distance"
+              type="number"
+              value={this.state.distance}
+              onChange={this.handleChange('distance')}
+              margin="normal"
+              variant="outlined"
+            />
           <br></br>
-          <label>difficulty</label>
-          <input placeholder={this.state.difficulty} onChange={this.handleChange('difficulty')} />
-          <br></br>
-          <label>location</label>
-          <input placeholder={this.state.location} onChange={this.handleChange('location')} />
-          <br></br>
-          <label>description</label>
-          <input placeholder={this.state.description} onChange={this.handleChange('description')} />
         
-        <button onClick={this.backButton}>Back</button>
-        <button onClick={this.makeEdit}>Submit Changes</button>
+          <TextField         
+              style={{margin: 7 , width: "15%"}}    
+              label="Difficulty 1-10"
+              type="number"
+              value={this.state.difficulty}
+              onChange={this.handleChange('difficulty')}
+              margin="normal"
+              variant="outlined"
+            />
+          <br></br>
+        
+          <TextField         
+              style={{margin: 7 , width: "15%"}}    
+              label="Location"
+              type="text"
+              value={this.state.location}
+              onChange={this.handleChange('location')}
+              margin="normal"
+              variant="outlined"
+            />
+          <br></br>
+          
+          <TextField   
+              id="outlined-multiline-flexible"
+              multiline
+              rowsMax="4"
+              style={{margin: 7 , width: "50%", height: "70px"}}         
+              label="Description"
+              type="text"
+              value={this.state.description}
+              onChange={this.handleChange('description')}
+              margin="normal"
+              variant="outlined"
+            />    
+            <br></br>      
+        
+            <Button variant="contained"  onClick={this.backButton}>Back</Button>
+            <center>
+            <Button variant="contained"  onClick={this.makeEdit}>Submit Changes</Button>
+            </center>
+
+        
       </div>
     );
   }

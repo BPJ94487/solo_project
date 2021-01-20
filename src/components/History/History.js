@@ -10,8 +10,8 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
-
 import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
 
 
 // Basic class component structure for React with default state
@@ -62,7 +62,7 @@ editHistory = (run) => {
               })}
           </TableBody>
         </Table>     
-        <button onClick={ () => this.navigate('/home') }>Back</button>
+        <Button variant="contained" onClick={ () => this.navigate('/home') }>Back</Button>
       </div>
     );
   }

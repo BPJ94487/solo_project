@@ -24,10 +24,11 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
  * POST route template
  */
 router.post('/', rejectUnauthenticated, (req, res) => {   
-    const queryText = `INSERT INTO run_history (user_id, history_name, history_location, workout_description, workout_distance, workout_difficulty, workout_date, workout_rating, workout_id )
-        VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9 );`;
+    console.log(req.body)
+    const queryText = `INSERT INTO run_history (user_id, history_name, history_location, workout_description, workout_distance, workout_difficulty, workout_date, workout_rating, workout_id, start_time, end_time )
+        VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11);`;
 
-    pool.query(queryText, [req.body.user_id, req.body.name, req.body.location, req.body.description, req.body.distance, req.body.difficulty, req.body.date, req.body.rating, req.body.id  ])
+    pool.query(queryText, [req.body.user_id, req.body.name, req.body.location, req.body.description, req.body.distance, req.body.difficulty, req.body.date, req.body.rating, req.body.id, req.body.departureTime, req.body.returnTim  ])
       .then(() => { res.sendStatus(201); })
       .catch((err) => {
         console.log('Error completing POST server query', err);

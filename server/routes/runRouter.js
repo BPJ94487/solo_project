@@ -37,9 +37,9 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.body);    
-    const queryText = `INSERT INTO future_progress ( workout_name, workout_location, workout_description, workout_distance, workout_difficulty, user_id )
-    VALUES ( $1, $2, $3, $4, $5, $6 );`;
-    pool.query(queryText, [req.body.name, req.body.location, req.body.description, req.body.distance, req.body.difficulty, req.body.user_id  ])
+    const queryText = `INSERT INTO future_progress ( workout_name, workout_location, workout_description, workout_distance, workout_difficulty, user_id, stretches )
+    VALUES ( $1, $2, $3, $4, $5, $6, $7 );`;
+    pool.query(queryText, [req.body.name, req.body.location, req.body.description, req.body.distance, req.body.difficulty, req.body.user_id, req.body.stretches ])
     .then(() => { res.sendStatus(201); })
       .catch((err) => {
         console.log('Error completing POST server query', err);

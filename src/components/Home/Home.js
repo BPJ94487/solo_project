@@ -12,9 +12,8 @@ import ImageHistory from './images/history_background.jpg';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Avatar from "@material-ui/core/Avatar";
-import ButtonBase from '@material-ui/core/ButtonBase';
+
+
 // import image from '../../../public/Images/make_progress';
 
 
@@ -34,23 +33,21 @@ class Home extends Component {
     // const { classes } = this.props;
     return (
       <div >
-        <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
-
-        <LogOutButton className="log-in" />  
+        <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>        
        
-          <div maxWidth={1800} >
+        <div maxWidth={1800} >
             
             <Card raised='true' style={{ width: "100%", height: "30%", display: 'inline-block' }}
               onClick={ () => this.navigate('/make_progress') }>
-                <center>
-              <CardHeader title='Make Progress' />
-              <CardMedia 
-                component="img"
-                // width="400"
-                height="400"
-                alt='running through mountains'
-                image= {ImageMakeProgress}
-              />
+              <center>
+                <CardHeader title='Make Progress' />
+                <CardMedia 
+                  component="img"
+                  // width="400"
+                  height="400"
+                  alt='running through mountains'
+                  image= {ImageMakeProgress}
+                />
               </center>
             </Card>
           
@@ -76,15 +73,11 @@ class Home extends Component {
                 alt='running through mountains'
                 image= {ImageHistory}
               />
-            </Card>
-
-
-            
-
+            </Card>           
           </div>
-          
-        
-
+        <center>
+          <LogOutButton className="log-in" /> 
+        </center>
       </div>
     );
   }

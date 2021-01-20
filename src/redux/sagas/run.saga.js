@@ -16,7 +16,7 @@ function* getCurrentRunList(action) {
 function* editRepeatRun(action) {
     if (action.type === 'EDIT_REPEAT_RUNS')
     try{
-        const response = yield axios.post(`/api/run`, action.payload)
+        yield axios.post(`/api/run`, action.payload)
     } catch ( error ) {
         console.log('error with the put request', error);
     }
@@ -25,7 +25,7 @@ function* editRepeatRun(action) {
 function* deleteRepeatRun(action) {
     if( action.type=== 'DELETE_REPEAT_RUN'){
         try{
-            const response = yield axios.delete(`/api/run/${action.payload}`)
+            yield axios.delete(`/api/run/${action.payload}`)
         } catch ( error ) {
             console.log('error with the delete request', error);            
         }
@@ -35,7 +35,7 @@ function* deleteRepeatRun(action) {
 function* putRepeatRun(action) {
     if(action.type === 'PUT_ROUTE_REPEAT')
     try{
-        const response = yield axios.put(`/api/run`, action.payload)
+        yield axios.put(`/api/run`, action.payload)
     } catch ( error ) {
         console.log('error with the put request', error);
     }
@@ -57,7 +57,7 @@ function* addRun(action){
 
     if ( action.type === 'MAKE_PROGRESS'){
         try{
-            const response = yield axios.post(`/api/runhistory`, action.payload)
+            yield axios.post(`/api/runhistory`, action.payload)
             yield put({ type: 'GET_RUN_HISTORY'})
         } catch( error ) {
             console.log('error adding run to server', error);
@@ -68,7 +68,7 @@ function* addRun(action){
 function* editHistory(action){
     if ( action.type === 'EDIT_RUN_HISTORY_SAGA'){
         try{
-            const response = yield axios.put(`/api/runhistory`, action.payload)
+            yield axios.put(`/api/runhistory`, action.payload)
         } catch( error ) {
             console.log('error editing run on server', error);
         }
