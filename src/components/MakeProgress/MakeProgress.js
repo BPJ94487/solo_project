@@ -6,11 +6,12 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-
+import Map from '../GoogleMap/GoogleMap'
 // Basic class component structure for React with default state
 // value setup. When making a new component be sure to replace
 // the component name MakeProgress with the name for the new
 // component.
+
 class MakeProgress extends Component {
   state = {
       user_id: this.props.store.user.id,
@@ -55,6 +56,15 @@ class MakeProgress extends Component {
     return (
       <div>
           <h1>MakeProgress</h1>
+
+
+          
+        <div>
+          <Map/>
+        </div>
+
+
+
           <TextField
               style={{margin: 7 , width: "15%"}}
               id="outlined-select-currency"
