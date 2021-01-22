@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Map from '../GoogleMap/GoogleMap';
 
 //Material UI stuff
 import TextField from '@material-ui/core/TextField';
@@ -68,6 +69,10 @@ class PlanRepeatRun extends Component {
     return (
       <div>
         <h1>Plan Repeat Run</h1>
+
+        <div className="map">
+          <Map/>
+        </div>
         <TextField        
               style={{margin: 7 , width: "15%"}}     
               label="Name"

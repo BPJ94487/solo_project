@@ -59,8 +59,8 @@ class MakeProgress extends Component {
 
 
           
-        <div>
-          <Map/>
+        <div className="map">
+          <Map />
         </div>
 
 
